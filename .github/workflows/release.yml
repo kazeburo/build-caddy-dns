@@ -5,7 +5,7 @@ on:
       - "v*"
 jobs:
   release_archive:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
 
       - name: Build caddy with plugin
         env:
-          CGO_ENABLED: 0
+          CGO_ENABLED: 1
           GOAMD64: v2
         run: |
           make zip
