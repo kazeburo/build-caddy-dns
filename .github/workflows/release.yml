@@ -28,7 +28,7 @@ jobs:
       - name: Build caddy with plugin
         env:
           CGO_ENABLED: 1
-          GOAMD64: v2
+          GOAMD64: v3
         run: |
           make zip
 
