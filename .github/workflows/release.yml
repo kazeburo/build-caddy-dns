@@ -19,7 +19,7 @@ jobs:
       - name: Read version from VERSION.txt
         id: version
         run: |
-          VERSION=$(cat VERSION.txt | tr -d ' \n')
+          VERSION=$(tr -d ' \n' < VERSION.txt)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Check if tag already exists
