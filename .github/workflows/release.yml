@@ -5,21 +5,21 @@ on:
       - "v*"
 jobs:
   release_archive:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Install deps
         run: |
           sudo apt install -y zip
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5
         with:
-          go-version: "1.21"
+          go-version: "stable"
 
       - name: Setup xcaddy
         run: |
@@ -27,17 +27,17 @@ jobs:
 
       - name: Build caddy with plugin
         env:
-          CGO_ENABLED: 1
+          CGO_ENABLED: 0
           GOAMD64: v3
         run: |
           make zip
 
       - name: Create Release
         id: create_release
-        uses: shogo82148/actions-create-release@v1
+        uses: shogo82148/actions-create-release@7b89596097b26731bda0852f1504f813499079ee # v1
 
       - name: Upload assets
-        uses: shogo82148/actions-upload-release-asset@v1
+        uses: shogo82148/actions-upload-release-asset@59cbc563d11314e48122193f8fe5cdda62ea6cf9 # v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
