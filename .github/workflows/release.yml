@@ -37,10 +37,11 @@ jobs:
           git tag "${{ steps.version.outputs.version }}"
           git push origin "${{ steps.version.outputs.version }}"
 
-      - name: Switch to tag if created
+      - name: Skip release if tag exists
         if: steps.check_tag.outputs.exists == 'true'
         run: |
-          git checkout "refs/tags/${{ steps.version.outputs.version }}"
+          echo "Tag already exists. Skipping release job."
+          exit 0
 
       - name: Install deps
         run: |
