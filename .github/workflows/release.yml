@@ -69,7 +69,7 @@ jobs:
         uses: shogo82148/actions-create-release@7b89596097b26731bda0852f1504f813499079ee # v1
         with:
           body: |
-            This release was automatically generated from VERSION.txt update.
+            This release (v${{ steps.version.outputs.version }}) was automatically generated from VERSION.txt update.
 
       - name: Upload assets
         if: steps.check_tag.outputs.exists == 'false'
